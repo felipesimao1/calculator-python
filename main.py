@@ -7,6 +7,12 @@ root.geometry('408x355')
 root.minsize(405, 355)
 root.maxsize(408, 355)
 
+num1 = ''
+divide = FALSE
+mult = FALSE
+sum = FALSE
+minus = FALSE
+
 root.configure(background='#282828')
 
 e = Entry(root, width=15, borderwidth=4, relief=FLAT, fg='#ffffff',
@@ -19,34 +25,66 @@ e.grid(
 )
 px = 40
 
-
+# Buttons
 def click_button(num):
-    return
-
+    e.insert(END, num)
 
 def division_button():
-   return
+    global num1
+    global divide
+    divide = TRUE
+    num1 = e.get()
+    e.delete(0,END)
 
 
 def multply_button():
-   return
-
+    global num1
+    global mult
+    mult = TRUE
+    num1 = e.get()
+    e.delete(0,END)
 
 def sum_button():
-    return
+    global num1
+    global sum
+    sum = TRUE
+    num1 = e.get()
+    e.delete(0,END)
 
 
 def minus_button():
-    return
+    global num1
+    global minus
+    minus = TRUE
+    num1 = e.get()
+    e.delete(0,END)
 
 
 def ac_button():
-    return
+    e.delete(0 , END)
 
 
 def total_button():
-    return
-
+    global minus
+    global sum
+    global mult
+    global divide
+    num2 = e.get()
+    e.delete(0 , END)
+    
+    if sum == TRUE:
+        e.insert(0,int(num1) + int(num2))
+        sum = FALSE    
+    if mult == TRUE:
+        e.insert(0,int(num1) * int(num2))
+        mult = FALSE  
+    if minus == TRUE:
+        e.insert(0, int(num1) - int(num2))
+        minus = FALSE  
+    if divide == TRUE:
+        e.insert(0, int(num1) // int(num2))
+        divide = FALSE
+        
 
 divide = Button(root,
                 text='/',
@@ -256,9 +294,6 @@ total = Button(root,
                font=('futura', 12, 'bold')
                )
 total.grid(row=4, column=4)
-
-
-root.mainloop()
 
 
 root.mainloop()
